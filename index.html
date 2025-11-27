@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -450,10 +451,10 @@
         let isLoggedIn = false;
         const ADMIN_CODE = '505050';
 
-        // Load applications from storage
+        // Load applications from storage (SHARED for all devices)
         async function loadApplications() {
             try {
-                const result = await window.storage.get('applications');
+                const result = await window.storage.get('applications', true);
                 if (result && result.value) {
                     applications = JSON.parse(result.value);
                 }
@@ -463,10 +464,10 @@
             }
         }
 
-        // Save applications to storage
+        // Save applications to storage (SHARED for all devices)
         async function saveApplications() {
             try {
-                await window.storage.set('applications', JSON.stringify(applications));
+                await window.storage.set('applications', JSON.stringify(applications), true);
             } catch (error) {
                 console.error('Error saving applications:', error);
             }
